@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hotelapp1/view/home_screen/home_screen.dart';
+import 'package:hotelapp1/view/bottom_navigation_bar_screen/bottom_navigation_bar_screen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BottomNavigationBarScreen(),));
     },);
   }
   Widget build(BuildContext context) {

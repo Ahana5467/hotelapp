@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotelapp1/view/password_screen/password_screen.dart';
 import 'package:hotelapp1/view/utils/imageconstant.dart';
 import 'package:hotelapp1/view/widgets/bottontext_screen.dart';
 import 'package:hotelapp1/view/widgets/textfield.dart';
@@ -32,7 +33,10 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20,),
-            BottontextScreen(bottonText: "Next"),
+            BottontextScreen(bottonText: "Next",onButtonPressed: () {
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PasswordScreen(),));
+              },
+              ),
             SizedBox(height: 20,),
             Row(
               children: [

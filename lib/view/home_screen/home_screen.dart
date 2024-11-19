@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hotelapp1/view/hotel_screen/hotel_screen.dart';
 import 'package:hotelapp1/view/login_screen/login_screen.dart';
-import 'package:hotelapp1/view/utils/constantcolor.dart';
 import 'package:hotelapp1/view/widgets/bottontext_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Constantcolor.PRIMARY,
-        items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home),
-        label: "Stays"
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite),
-        label: "Favourites"
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.settings),
-        label: "Settings"
-        )
-      ]),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -90,7 +82,9 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(height: 10,),
                        Padding(
                          padding: const EdgeInsets.all(8.0),
-                         child: BottontextScreen(bottonText: "Search"),
+                         child: BottontextScreen(bottonText: "Search",onButtonPressed: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HotelScreen(),));
+                          },),
                        ),
                       ],
                     ),

@@ -10,14 +10,14 @@ class BottontextScreen extends StatelessWidget {
     return InkWell(
       onTap: onButtonPressed,
       child: Container(
-      height: 55,
+       height: 50,
       width: double.infinity,
       decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(4),
-      color: Colors.blue
+      color: Colors.blue.shade800
       ),
       child: Center(child: Text(bottonText,style:TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600),))
-            ),
+          ),
     );
   }
 }
