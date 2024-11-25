@@ -83,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                        Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: BottontextScreen(bottonText: "Search",onButtonPressed: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HotelScreen(),));
+                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>HotelScreen() ,));
+            
                           },),
                        ),
                       ],

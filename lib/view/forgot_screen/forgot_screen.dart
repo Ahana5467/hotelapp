@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotelapp1/view/login_screen/login_screen.dart';
 import 'package:hotelapp1/view/widgets/bottontext_screen.dart';
 
 class ForgotScreen extends StatelessWidget {
@@ -41,7 +42,7 @@ class ForgotScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20,),
-            BottontextScreen(bottonText: "Send reset link"),
+            BottontextScreen(bottonText: "Send reset link",onButtonPressed: () =>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen())) ,),
           ],
         ),
       ),

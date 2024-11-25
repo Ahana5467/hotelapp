@@ -18,6 +18,7 @@ class _CustomradioState extends State<Customradio> {
       children: [
       Radio(value: 'Option 1' , groupValue: selectedOption, onChanged: (value) {
           selectedOption = value;
+          setState(() {});
         },),
          Text(widget.text,style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
       ]

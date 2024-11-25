@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hotelapp1/dummbydb.dart';
 import 'package:hotelapp1/view/details_screen/details_screen.dart';
+import 'package:hotelapp1/view/favourite_screen/favourite_screen.dart';
 import 'package:hotelapp1/view/filters_screen/filters_screen.dart';
+import 'package:hotelapp1/view/home_screen/home_screen.dart';
 import 'package:hotelapp1/view/hotel_screen/widgets/customradio.dart';
+import 'package:hotelapp1/view/setting_screen/setting_screen.dart';
 import 'package:hotelapp1/view/utils/constantcolor.dart';
+
+
 
 class HotelScreen extends StatefulWidget {
 
@@ -13,7 +19,9 @@ class HotelScreen extends StatefulWidget {
 }
 
 class _HotelScreenState extends State<HotelScreen> {
-  bool isChecked = false;
+  // bool isChecked = false;
+  int selectedIndex = 0;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +33,125 @@ class _HotelScreenState extends State<HotelScreen> {
             SizedBox(height: 5),
             _buildscrollcard(),
             _buildcardscreen(), 
+            // tabScreen[selectedIndex]
           ]
         ),
       ),     
-    );
+       floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your map navigation logic here
+        },
+        label: Text('Map',style: TextStyle(color: Colors.white),),
+        icon: Icon(Icons.map,color: Colors.white,),
+        backgroundColor: const Color.fromARGB(255, 119, 93, 93),
+      ),
+       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+bottomNavigationBar: Padding(
+  padding: const EdgeInsets.all(16),
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.white, // Background color
+      borderRadius: BorderRadius.circular(10), // Rounded corners
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          blurRadius: 4,
+          offset: Offset(0, 2), // Shadow position
+        ),
+      ],
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute items evenly
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                selectedIndex = 0; // Update selected index
+              });
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.hotel,
+                  color: selectedIndex == 0 ? Colors.blue : Colors.grey,
+                ),
+                Text(
+                  "Stays",
+                  style: TextStyle(
+                    color: selectedIndex == 0 ? Colors.blue : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                selectedIndex = 1; // Update selected index
+              });
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => FavouriteScreen()),
+              );
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.favorite,
+                  color: selectedIndex == 1 ? Colors.blue : Colors.grey,
+                ),
+                Text(
+                  "Favourite",
+                  style: TextStyle(
+                    color: selectedIndex == 1 ? Colors.blue : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                selectedIndex = 2; // Update selected index
+              });
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SettingScreen()),
+              );
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.settings,
+                  color: selectedIndex == 2 ? Colors.blue : Colors.grey,
+                ),
+                Text(
+                  "Settings",
+                  style: TextStyle(
+                    color: selectedIndex == 2 ? Colors.blue : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
+
+      );
   }
 
   Padding _buildscrollcard() {
@@ -37,21 +160,21 @@ class _HotelScreenState extends State<HotelScreen> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(3,(index) => Padding(
+                children: List.generate(Dummbydb.scrollcard.length,(index) =>Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                    child: Container(
                       padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 1),borderRadius: BorderRadius.circular(5)),
-                      child: Row(
-                        children: [
-                          Icon(Icons.info_outline),
-                          Text("How payments to us affect ranking",style: TextStyle(fontSize: 10),),
-                          SizedBox(width: 20),
-                          Text("X",style: TextStyle(color: Constantcolor.BLACK,fontWeight: FontWeight.bold),),
-                        ],
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline),
+                            Text(Dummbydb.scrollcard[index],style: TextStyle(fontSize: 10),),
+                            SizedBox(width: 20),
+                            Text("X",style: TextStyle(color: Constantcolor.BLACK,fontWeight: FontWeight.bold),),
+                           ],
+                          ),
+                        ),
                       ),
-                    ),
-                ),
                   ),
               ),
             ),
@@ -126,7 +249,8 @@ class _HotelScreenState extends State<HotelScreen> {
                                 icon:Icon(Icons.filter_hdr_outlined,color: Constantcolor.PRIMARY,),),
                                 Text("FILTER",style: TextStyle(color: Constantcolor.PRIMARY,fontSize: 15,)),
                                 Spacer(),
-                                ElevatedButton(onPressed: () {
+                                InkWell(
+                                  onTap: () {
                                 showModalBottomSheet(
                                   enableDrag: false,
                                   isScrollControlled: true,
@@ -154,7 +278,7 @@ class _HotelScreenState extends State<HotelScreen> {
                                       Customradio(text: "Distance only"),
                                       SizedBox(height: 10),
                                     ]
-                                                                    ),
+                                 ),
                                   ),);
                                 },
                                 child:Row(
@@ -178,7 +302,7 @@ class _HotelScreenState extends State<HotelScreen> {
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(4, (index) => Padding(
+              children: List.generate(Dummbydb.hoteldetails.length, (index) => Padding(
                 padding: const EdgeInsets.all(12),
                 child: Container(
                         padding: EdgeInsets.all(10),
@@ -198,7 +322,7 @@ class _HotelScreenState extends State<HotelScreen> {
                                   fit: BoxFit.cover,
                                   height: 150,
                                   width: double.infinity,
-                                  "https://media.istockphoto.com/id/185083188/photo/luxury-shangri-la-hotel-room.jpg?s=1024x1024&w=is&k=20&c=c07mcS7zJ9-cPEjRS4JE-qGPymHSAoU-DNBsa8wmA8E="),
+                                  Dummbydb.hoteldetails[index]["imageUrl"]),
                                   Positioned(
                                     top: 8,
                                     left: 8,
@@ -225,16 +349,16 @@ class _HotelScreenState extends State<HotelScreen> {
                             Row(children: [
                               Icon(Icons.star,color: Colors.amber,size:10 ,),
                               Icon(Icons.star,color: Colors.amber,size: 10,),
-                              Text("Hostel",style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),)
+                              Text("Hotel",style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),)
                             ],),
-                             Text("Roop",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
+                             Text(Dummbydb.hoteldetails[index]["Hotelname"],style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
                              SizedBox(height: 9),
                              Row(children: [
                               Container(
                                 padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.black54,),child: Text(" 7.1 ",style: TextStyle(color: Colors.white,fontSize: 12),),),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.black54,),child: Text(Dummbydb.hoteldetails[index]["rating"],style: TextStyle(color: Colors.white,fontSize: 12),),),
                                 SizedBox(width: 5),
-                                Text("Fair",style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),),
+                                Text(Dummbydb.hoteldetails[index]["fair"],style: TextStyle(color: Colors.black,fontSize: 10,fontWeight: FontWeight.bold),),
                                 SizedBox(width: 5),
                                 Icon(Icons.location_on,color: Colors.black,),
                                 SizedBox(width: 5),
@@ -248,8 +372,8 @@ class _HotelScreenState extends State<HotelScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [Column(
                                 children: [
-                                  Text("₹600",style: TextStyle(color: Colors.green.shade700,fontSize: 20,fontWeight: FontWeight.bold),),
-                                  Text("MakeMyTrip",style: TextStyle(color: Colors.black,fontSize: 10),)
+                                  Text(Dummbydb.hoteldetails[index]["price"],style: TextStyle(color: Colors.green.shade700,fontSize: 20,fontWeight: FontWeight.bold),),
+                                  Text(Dummbydb.hoteldetails[index]["booking name"],style: TextStyle(color: Colors.black,fontSize: 10),)
                                 ]),
                                 Spacer(),
                                 Text("View deal",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
@@ -275,5 +399,8 @@ class _HotelScreenState extends State<HotelScreen> {
                   ),
                 ),
           );
+          
   }
 }
+
+

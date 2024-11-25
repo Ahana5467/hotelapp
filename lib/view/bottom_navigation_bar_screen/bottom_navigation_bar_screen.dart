@@ -14,6 +14,7 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   int selectedIndex = 0;
   List tabScreen  = [
+    // HotelScreen(),
     HomeScreen(),
     FavouriteScreen(),
     SettingScreen()

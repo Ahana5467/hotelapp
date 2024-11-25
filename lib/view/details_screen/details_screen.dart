@@ -24,27 +24,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return  DefaultTabController(
       length: 2,
       child: Scaffold(
-        // appBar: AppBar(
-        //   leading: Icon(Icons.arrow_back),
-        //   actions: [
-        //     Icon(Icons.share),
-        //     SizedBox(width: 10),
-        //     Icon(Icons.favorite_border),
-        //     SizedBox(width: 10),
-        //   ],
-        // ),
-        // body: Column(
-        //   children: [
-        //     // Hotel Image Carousel
-        //     Image.network(
-        //       "https://media.istockphoto.com/id/1129076301/photo/chinese-style-bedroom-interior.jpg?s=2048x2048&w=is&k=20&c=DzYc3ul4URFHjJUlGhTTiTVuFFJG6O4GhphPHjZjSXA=", // Replace with actual image URL
-        //       height: 200,
-        //       width: double.infinity,
-        //       fit: BoxFit.cover,
-        //     ),
-            
-        //   ]
-        // )
+        
         body: 
         CustomScrollView(
           slivers: [
